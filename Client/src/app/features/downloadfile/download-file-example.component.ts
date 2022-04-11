@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { ToolService } from '../../_services/tool.service';
 
@@ -8,7 +9,10 @@ import { ToolService } from '../../_services/tool.service';
   styleUrls: ['./download-file-example.component.css'],
 })
 export class DownloadFileExampleComponent implements OnInit {
-  constructor(private toolService: ToolService) {}
+  constructor(
+    private toolService: ToolService,
+    private toaster: ToastrService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -17,13 +21,43 @@ export class DownloadFileExampleComponent implements OnInit {
   }
 
   downloadIt2(): void {
-    this.toolService.getToolReport(1000).pipe(take(1)).subscribe(resp => {
-        if (resp.body)
-        {
-          this.toolService.downloadFile(resp.body, 'MoreControlFile.zip')
-        } else {
-          console.log("response is null or undefined!")
-        }
-    });
+    this.toolService
+      .getToolReport(1000)
+      .pipe(take(1))
+      .subscribe({
+        next: (resp) => {
+          if (resp.body) {
+            this.toolService.downloadFile(resp.body, 'MoreControlFile.zip');
+            this.toaster.success('File downloaded.');
+          } else {
+            this.toaster.error(
+              'No blob data returned for the file (see console output)'
+            );
+            console.log(resp);
+          }
+        },
+        error: (e) => {
+          this.toaster.error('Error (see console output)');
+          console.log(e);
+        },
+      });
+
+    // Deprecated version (https://rxjs.dev/deprecations/subscribe-arguments)
+    // this.toolService.getToolReport(1000).pipe(take(1))
+    //   .subscribe((resp) => {
+    //     if (resp.body) {
+    //       this.toolService.downloadFile(resp.body, 'MoreControlFile.zip');
+    //       this.toaster.success('File downloaded.');
+    //     } else {
+    //       this.toaster.error(
+    //         'No blob data returned for the file (see console output)'
+    //       );
+    //       console.log(resp);
+    //     }
+    //   },
+    //   (e) => {
+    //     this.toaster.error('Error (see console output)');
+    //     console.log(e);
+    //   });
   }
 }

@@ -1,7 +1,21 @@
-<p>Click the button to download a zip file from the server!</p>
-
-<button (click)="downloadIt1()">Download file and service does service does everything (less control).</button>
-
-<br><br>
-
-<button (click)="downloadIt2()">Download file and subscribe and handle naming in the component (more control).</button>
+<div class="flex-grid">
+  <div>
+    <h1>Download</h1>
+  </div>
+  <div>
+    <p>Click the button to download a zip file from the server!</p>
+  </div>
+  <div>
+    <button (click)="downloadIt1()" class="btn btn-primary">
+      Download file and service does service does everything (less control).
+    </button>
+  </div>
+  <div>
+    <button (click)="downloadIt2()" class="btn btn-primary">
+      Download file and subscribe and handle naming in the component (more control).
+    </button>
+  </div>
+  <div>
+    <button class="btn btn-success" routerLink="/">Back to home</button>
+  </div>
+</div>
