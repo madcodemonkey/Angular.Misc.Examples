@@ -89,7 +89,7 @@ namespace ACME.Services
                     Id = 2,
                     FirstName = "James",
                     LastName = "Thompson",
-                    Email = "bob.hope@gmail.com",
+                    Email = "james.thompson@gmail.com",
                     DateOfBirth = new DateTime(1976, 3, 20),
                     AddressLine1 = "416 Sid Snyder Ave SW",
                     City = "Olympia",

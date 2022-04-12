@@ -25,9 +25,9 @@
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictPropertyInitialization": false,
-    "strictTemplates": true
+    // "strictInjectionParameters": true,
+    // "strictInputAccessModifiers": true,
+     "strictPropertyInitialization": false,
+     "strictTemplates": false
   }
 }

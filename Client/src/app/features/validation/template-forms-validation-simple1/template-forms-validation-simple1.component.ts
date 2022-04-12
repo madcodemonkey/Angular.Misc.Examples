@@ -8,13 +8,13 @@ import { PeopleService } from 'src/app/_services/people.service';
 
 @Component({
   selector: 'app-forms-validation-simple1',
-  templateUrl: './forms-validation-simple1.component.html',
-  styleUrls: ['./forms-validation-simple1.component.css']
+  templateUrl: './template-forms-validation-simple1.component.html',
+  styleUrls: ['./template-forms-validation-simple1.component.css']
 })
-export class FormsValidationSimple1Component implements OnInit {
+export class TemplateFormsValidationSimple1Component implements OnInit {
   person: Person | null = null;
   stateList: LookupItem[] = [];
-  @ViewChild('editForm') editForm: NgForm;
+  @ViewChild('editForm') editForm!: NgForm;
 
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
     if (this.editForm.dirty){
@@ -33,6 +33,7 @@ export class FormsValidationSimple1Component implements OnInit {
     let id = +this.route.snapshot.params['id'];
     this.updatePerson(id);
   }
+
 
   updateMember() {
     console.log(this.editForm)
