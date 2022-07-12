@@ -17,7 +17,7 @@ export class DownloadFileExampleComponent implements OnInit {
   ngOnInit(): void {}
 
   downloadIt1(): void {
-    this.toolService.downloadToolReport(1000);
+    this.toolService.downloadToolReportUseServerFileName(1000);
   }
 
   downloadIt2(): void {
@@ -41,23 +41,5 @@ export class DownloadFileExampleComponent implements OnInit {
           console.log(e);
         },
       });
-
-    // Deprecated version (https://rxjs.dev/deprecations/subscribe-arguments)
-    // this.toolService.getToolReport(1000).pipe(take(1))
-    //   .subscribe((resp) => {
-    //     if (resp.body) {
-    //       this.toolService.downloadFile(resp.body, 'MoreControlFile.zip');
-    //       this.toaster.success('File downloaded.');
-    //     } else {
-    //       this.toaster.error(
-    //         'No blob data returned for the file (see console output)'
-    //       );
-    //       console.log(resp);
-    //     }
-    //   },
-    //   (e) => {
-    //     this.toaster.error('Error (see console output)');
-    //     console.log(e);
-    //   });
   }
 }

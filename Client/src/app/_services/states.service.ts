@@ -14,11 +14,11 @@ export class StatesService {
 
 
   getAll() : Observable<LookupItem[]> {
-    return this.http.get<LookupItem[]>(`${this.baseUrl}/StateLookup`);
+    return this.http.get<LookupItem[]>(`${this.baseUrl}/State`);
   }
 
   getById(id : number) : Observable<LookupItem> {
-    return this.http.get<LookupItem>(`${this.baseUrl}/StateLookup?id=${id}`);
+    return this.http.get<LookupItem>(`${this.baseUrl}/State?id=${id}`);
   }
 
 }

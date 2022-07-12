@@ -13,12 +13,12 @@ export class ToolService {
   constructor(private http: HttpClient) { }
 
   /**
-   * The component that uses this doesn't want any control over how the file is downloaded.
+   * This shows an example of pulling the file name out of the header so that the user can specify it.
    * @param numberToCreate  Number of items to create in the CSV file inside the zip file you will download.
    */
-  downloadToolReport(numberToCreate: number) {
+  downloadToolReportUseServerFileName(numberToCreate: number) {
 
-    this.http.get(`${this.baseUrl}/ToolReport/${numberToCreate}`, {observe: 'response', responseType: 'blob' })
+    this.getToolReport(numberToCreate)
          .pipe(take(1))
         .subscribe(resp => {
 
@@ -31,10 +31,32 @@ export class ToolService {
         });
   }
 
+  /**
+   * This shows an example of pulling the file name out of the header so that the user can specify it.
+   * @param numberToCreate  Number of items to create in the CSV file inside the zip file you will download.
+   */
+   downloadToolReportUseClientFileName(numberToCreate: number, filename: string) {
+
+    this.getToolReport(numberToCreate)
+         .pipe(take(1))
+        .subscribe(resp => {
+          if (resp.body !== null) this.downloadFile(resp.body, filename)
+        });
+  }
+
+  /**
+   * This allows the client to handle the blob and have more control.
+   * @param numberToCreate  Number of items to create in the CSV file inside the zip file you will download.
+   */
   getToolReport(numberToCreate: number): Observable<HttpResponse<Blob>> {
     return this.http.get(`${this.baseUrl}/ToolReport/${numberToCreate}`, {observe: 'response', responseType: 'blob' });
   }
 
+  /**
+   * Takes the blob and a file name and downloads the file to the user's hard drive.
+   * @param data The blob data
+   * @param filename The file name.
+   */
   downloadFile(data: Blob, filename: string) {
     const blob = new Blob([data], { type: 'application/zip' });
     const url= window.URL.createObjectURL(blob);
